@@ -6,6 +6,7 @@ const theme = {
       default: "#fff",
       black: "#7B8794",
       muted: "#CBD2D9",
+      premium: "#EFECEC",
     },
     typo: {
       neutral: "#323F4B",

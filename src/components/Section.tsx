@@ -92,8 +92,13 @@ function Section({ alias }: Props) {
           const isPremium = item.taxonomy.statusTags?.includes("premium");
 
           return (
-            <Box my={1} key={item._id} bg={isPremium ? "#EFECEC" : ""} pb={4}>
-              <Box px={3} flexDirection={"row"} py={1}>
+            <Box
+              my={1}
+              key={item._id}
+              bg={isPremium ? "background.premium" : ""}
+              pb={4}
+            >
+              <Box px={3} flexDirection={"row"} py={1} position={"relative"}>
                 <Box mr={2} p={1} bg="background.black" borderRadius={0}>
                   <Typography color="white">
                     {item.taxonomy.primary_section.name}
@@ -102,6 +107,11 @@ function Section({ alias }: Props) {
                 {item.taxonomy.tags?.[0] && (
                   <Box mr={2} p={1} bg="background.muted" borderRadius={0}>
                     <Typography>{item.taxonomy.tags?.[0]?.text}</Typography>
+                  </Box>
+                )}
+                {isPremium && (
+                  <Box position="absolute" right={3} top={2}>
+                    <Typography fontFamily={"regular"}>Premium</Typography>
                   </Box>
                 )}
               </Box>
