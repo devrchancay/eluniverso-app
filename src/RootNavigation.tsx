@@ -39,7 +39,7 @@ function TabStack() {
         },
         tabBarActiveTintColor: "#323F4B",
         tabBarInactiveTintColor: "#7B8794",
-        tabBarLabelStyle: { display: "none", height: 0 },
+        tabBarShowLabel: false,
       })}
     >
       <Tab.Screen name="Home" component={Home} />

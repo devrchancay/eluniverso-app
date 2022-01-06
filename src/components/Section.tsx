@@ -88,8 +88,11 @@ function Section({ alias }: Props) {
         {data?.content_elements?.slice(1).map((item: any) => {
           const hasImage =
             !!item?.promo_items?.basic?.thumbnails?.sm?.classic?.fixed?.src;
+
+          const isPremium = item.taxonomy.statusTags?.includes("premium");
+
           return (
-            <Box my={3} key={item._id}>
+            <Box my={1} key={item._id} bg={isPremium ? "#EFECEC" : ""} pb={4}>
               <Box px={3} flexDirection={"row"} py={1}>
                 <Box mr={2} p={1} bg="background.black" borderRadius={0}>
                   <Typography color="white">

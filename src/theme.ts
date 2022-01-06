@@ -12,6 +12,7 @@ const theme = {
       muted: "#7B8794",
     },
     control: {
+      muted: "#7B8794",
       default: {
         background: "#55AB67",
         text: "#FFFFFF",

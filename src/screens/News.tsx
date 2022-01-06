@@ -1,3 +1,5 @@
+import { useNavigation } from "@react-navigation/native";
+import { TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useQuery } from "react-query";
 import { getNewsById } from "../api/news";
@@ -9,9 +11,14 @@ import LinkList from "../components/LinkList";
 import Paragraph from "../components/Paragraph";
 
 import Typography from "../components/Typography";
+import BookMark from "../icons/Bookmark";
+import Left from "../icons/Left";
+import Share from "../icons/Share";
+import theme from "../theme";
 
 function News({ route }: any) {
   const { id } = route?.params;
+  const navigation = useNavigation();
 
   const { data, isLoading } = useQuery(`news/${id}`, () => getNewsById({ id }));
 
@@ -25,6 +32,47 @@ function News({ route }: any) {
         <Box>
           <Header />
         </Box>
+        <Box
+          px={3}
+          py={1}
+          flexDirection="row"
+          alignItems="center"
+          alignContent="center"
+        >
+          <Box width="50%">
+            <Box
+              as={TouchableOpacity}
+              onPress={() => {
+                navigation.goBack();
+              }}
+            >
+              <Left
+                width={24}
+                height={24}
+                stroke={theme.colors.control.muted}
+              />
+            </Box>
+          </Box>
+          <Box width="50%" flexDirection={"row"} justifyContent={"flex-end"}>
+            <Box pl={3}>
+              <Share
+                width={24}
+                height={24}
+                stroke={theme.colors.control.muted}
+              />
+            </Box>
+            <Box pl={3}>
+              <BookMark
+                width={24}
+                height={24}
+                stroke={theme.colors.control.muted}
+              />
+            </Box>
+          </Box>
+        </Box>
+        <Box px={4} justifyContent="center" py={1}>
+          <Box borderTopWidth={1} borderColor="#C4C4C4" />
+        </Box>
         <Box px={4}>
           <Box py={3}>
             <Typography fontSize={5} color={"typo.neutral"} fontFamily="semi">
@@ -37,17 +85,19 @@ function News({ route }: any) {
             </Typography>
           </Box>
           <Box py={4}>
-            <Box overflow={"hidden"} borderRadius={5}>
-              <CustomFastImage
-                source={{ uri: data?.promo_items?.basic?.url }}
-                cacheKey={id}
-                resizeMode="cover"
-                style={{
-                  width: "100%",
-                  height: 250,
-                }}
-              />
-            </Box>
+            {data?.promo_items?.basic?.url && (
+              <Box overflow={"hidden"} borderRadius={5}>
+                <CustomFastImage
+                  source={{ uri: data?.promo_items?.basic?.url }}
+                  cacheKey={id}
+                  resizeMode="cover"
+                  style={{
+                    width: "100%",
+                    height: 250,
+                  }}
+                />
+              </Box>
+            )}
             <Box pt={2} pl={2}>
               <Typography fontFamily={"regular"} color="typo.muted">
                 {data?.promo_items?.basic?.alt_text}
