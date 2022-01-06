@@ -46,6 +46,7 @@ const CustomFastImage = (props: any) => {
     source: { uri },
     cacheKey,
     style,
+    blurRadius = 0,
   } = props;
   const isMounted = useRef(true);
   const [imgUri, setUri] = useState("");
@@ -80,7 +81,7 @@ const CustomFastImage = (props: any) => {
   return (
     <>
       {imgUri ? (
-        <Image source={{ uri: imgUri }} style={style} />
+        <Image source={{ uri: imgUri }} style={style} blurRadius={blurRadius} />
       ) : (
         <View
           style={{ ...style, alignItems: "center", justifyContent: "center" }}
